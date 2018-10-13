@@ -1,0 +1,199 @@
+Ok      Comprendre le fonctionnement des parametres optionnels
+Ok       Calculer le nombre d'arguments opt grace a format
+            DOC : Each conversion specification is introduced by the % character
+        Determiner le type de chaque argument
+        Gerer la champs (Nombre de caractere affiche)
+            %6d (print as a decimal integer with a width of at least 6 wide)
+            %4f	(print as a floating point with a width of at least 4 wide)
+        Tester si avec plusieurs chaines de caracteres en format ou dans le params, ca fonctionne par defaut
+
+END :
+        Changer les messages d'erreurs dans errors.h
+-------------------------
+
+LES DIFFERENTS conversionS DE PRINTF :
+
+ok -s : argument est une chaine de caractere, si pas de modif de longueur
+Voir ce que ca fait
+
+
+ok -S -ls : chaine de caracteres wchar_t* (Wide Character Type == Caractere Etendu)
+        -Comment reusir a les afficher : L"chaine"
+Voir ce que ca fait
+
+ok -p : adresse de pointeur affiche en hexadecimal
+
+ok -d -i: signed decimal
+
+ok -D - ld -li: signed long
+
+ok -o : signed octal
+
+ok -O -lo : unsigned octal
+
+ok -u : Unsigned int
+
+ok -U -lu : Unsigned long
+
+ok -x : hexa avec les caracteres en minuscule
+
+ok -X -lx: ihexa avec les caracteres en majuscule
+
+ok-c : caractere ascii standard
+        -Comment afficher : ''
+
+ok -C -lc: wint_t = caractere ascii etendu
+        -Comment afficher : L''
+
+
+OK % : un '%' est affiche. (L'argument exact est donc '%%')
+
+# : indique que la valeur doit être convertie en une autre forme. Pour la conversion o le premier caractère de la chaîne de sortie vaudra zéro (en ajoutant un préfixe 0 si ce n'est pas déjà un zéro). Pour les conversions x et X une valeur non nulle reçoit le préfixe « 0x » (ou « 0X » pour l'indicateur X). Pour les conversions a, A, e, E, f, F, g, et G le résultat contiendra toujours un point décimal même si aucun chiffre ne le suit (normalement, un point décimal n'est présent avec ces conversions que si des décimales le suivent). Pour les conversions g et G les zéros en tête ne sont pas éliminés, contrairement au comportement habituel. Pour les autres conversions, cet attribut n'a pas d'effet.
+
+0 : indique le remplissage avec des zéros. Pour les conversions d, i, o, u, x, X, a, A, e, E, f, F, g, et G, la valeur est complétée
+ à gauche avec des zéros plutôt qu'avec des espaces. Si les attributs 0 et - apparaissent ensemble, l'attribut 0 est ignoré.
+  Pour les autres conversions, le comportement est indéfini.
+
+- : indique que la valeur doit être justifiée sur la limite gauche du champ
+ (par défaut elle l'est à droite). Sauf pour la conversion n, les valeurs sont complétées à droite par des espaces, plutôt qu'à gauche par des zéros ou des blancs. Un attribut - surcharge un attribut 0 si les deux sont fournis.
+ Si d ou i, si espace en argument, alors 1 espace a gauche meme si champs trop petit
+ Sinon espaces a droite
++ : Un signe (+ ou -) doit toujours être imprimé avant un nombre produit par une conversion signée. Par défaut, un signe n'est utilisé que pour des valeurs négatives. Un attribut + surcharge un attribut « espace » si les deux sont fournis.
+        Surcharge le -
+
+ (espace)
+
+OK hh : La conversion entière suivante correspond à un signed char ou unsigned char, ou la conversion n suivante correspond à un argument pointeur sur un signed char.
+OK h : La conversion entière suivante correspond à un short int ou unsigned short int, ou la conversion n suivante correspond à un argument pointeur sur un short int.
+OK l : La conversion entière suivante correspond à un long int ou unsigned long int, ou la conversion n suivante correspond à un pointeur sur un long int, ou la conversion c suivante correspond à un argument wint_t, ou encore la conversion s suivante correspond à un pointeur sur un wchar_t.
+OK ll : La conversion entière suivante correspond à un long long int, ou unsigned long long int, ou la conversion n suivante correspond à un pointeur sur un long long int.
+OK j : La conversion entière suivante correspond à un argument intmax_t ou uintmax_t.
+OK z : La conversion entière suivante correspond à un argument size_t ou ssize_t. (La bibliothèque libc5 de Linux proposait l'argument Z pour cela, ne pas utiliser).
+
+
+NOTES :
+
++ et espace : Le + surcharge espace si champs trop petit pour mettre des espaces
++ et 0 : Le + surcharge 0 si champs trop petit pour  mettre des 0
+0 et espace : 1 espace surcharge le 0 puis 0 surcharge espace
+
+- : n'est inscrit que si la taille de champs le permet
+- et champs ok : remplit avec espaces par la droite
+- et 0 : - surcharge le 0 (pas de 0 peu importe la taille du champs)
+- et espace : 1 espace a gauche peu importe la taille du champs, puis ca remplit par la droite (dependamment de la taille du champs)
+
+- et espace et 0 : le 0 est surcharge (pas de 0)
+                   1 espace a gauche peu importe la taille du champs, puis ca remplit par la droite (dependamment de la taille du champs)
+Ordre de surcharge : +-0 (espace) : S'il y a des espaces seul, l'espace fait sa vie
+                                   S' il y a un 0, 1 espace surcharge le 0 puis 0 surcharge espace
+                                   - surcharge le 0 : pas de zero
+                                   + surcharge le - et donc retablit l'ordre d'avant
+
+
+h et l : l prioritaire
+hh et l : l prioritaire
+
+hh : hhu obligatoire si arg > char_max, hhu ne fonctionne pas avec int z > 255
+    L'overflow n'a pas de limite quand on depasse UCHAR_MAX
+
+
+Le champs : C'est la longueur maximum (en caractere) de la sortie.
+La champs : elle permet de preciser le maximum de caracteres de l'argument, et la longueur de la sortie.
+
+ORDRE :
+
+	Each conversion specification is intro‐
+    	   duced by the character %, and ends with a conversion conversion.  In between there  may  be  (in
+       		this  order)  zero or more flag, an optional minimum field width, an optional champs and an
+       		optional length conversion.
+
+       		L'ordre est [flag(s)][Field][.champs][Lenght_conversion][Conversion]
+       					[+-0#][0-???][0-INTMAX][lllhhhjz][sSpdDioOuUxXcC%]
+
+DONETODO	Conversion
+DONETODO	Lenght_conversion
+DONETODO	FLAGS et champs
+DONETODO	blank ' '
+DONETODO	+
+DONETODO	+ et blank
+DONETODO	blank et +
+DONETODO	0 et champs
+DONETODO	TEST FLAG '0' ET champs %0 pas adapte a la gestion de la champs
+DONETODO		champs sans flag
+DONETODO		blank ' ' et champs
+DONETODO		blank ' ' et 0 et champs
+DONETODO		0 et blank ' ' et champs
+DONETODO			Comprendre la difference entre precision et champs
+DONETODO			Gerer la precision seule
+DONETODO			Gerer la precision pour l'argument %s
+DONETODO			Tester puis gerer la precision a 0 pour tous les arguments
+DONETODO			Tester puis gerer les associations champs et precision (sauf %s)
+DONETODO			Finir de corriger le cas %p quand on a precision et champs >0
+	DONETODO		Corriger le cas :  |% +20.15p| : |     0x00000ffffcbac| il y a 2 espaces en trop et 2 0 en moins
+	DONETODO		Reverifier tous les %o et les %p
+DONETODO			gerer champs et precision pour %s
+DONETODO			Etudier les makefile et Faire le Makefile pour creer libftprintf.a
+DONETODO				Tester et adapter la nouvelle fonction handle_format
+	DONETODO			J'en etais a TEST FLAG '0' ET CHAMPS : des caracteres etranges resortent de mon printf
+	DONETODO				Tester la modification faites pour la continuite de 0 dans la fonction test_champs
+	DONETODO			Resoudre l'erreur du moulitest 05, et se detendre quand je dois revenir sur mon travailler : C'est dur, mais je reussirai
+	DONETODO				Trouver pourquoi les wchar_t ne s'affichent pas de la meme facon avec champs et sans champs  
+    DONETODO                   Gerer le cas printf("%15.4d", -42)
+    DONETODO						Finir la gestion du flag.blank + flag.less
+DONETODO			gerer le flag -
+DONETODO			Gerer le flag %
+TODO				Tester puis gerer la conversion %p avec un pointeur null
+TODO				Normer chaque fonction a 25lignes  pour 80 caracteres par ligne max
+TODO				Amelioration 1 : Se debrouiller pour initialiser les i a 0 en imprimant par la gauche dans les aux_functions
+ABORTTODO				Regarder comment obtenir le n-ieme argument sans avoir a stocker la va_list
+DONETODO				Faire la fonction de convertion d'un intmax_t en binaire avec signe -+ et 0
+TODO				refaire les tests en changeant le type de nbr de uintmax_t vers intmax_t dans my_putnbr_long_long
+TODO				Gerer le intmax_min dans la fonction my_putnbr_long_long dans numbers_functions.c
+TODO			Supprimer tous les write et commentaires qui ne sont pas dans la fonction finale
+DONETODO			Grosse erreur dans %f pour couper la partie decimale avec la precision
+TODO				Refaire le refacto-norme pour les fonctions de handle_conversions.c
+Champs : Longueur total de caracteres affiches
+Precision : Longueur total de l'argument sans le signe
+
+Surcharge :
+0 et espace : 0 surcharge espace
+
+Signe + et - :
+	Le signe n'est jamais compte dans la precision mais il l'est dans le champs
+
+OK ld D li
+OK lld lli lD
+OK hd hi
+OK hhd hhi
+OK jd ji
+OK zd zi
+OK lu
+OK llu
+OK hu
+OK hhu
+OK ju
+OK zu
+OK lo O
+OK llo lO
+OK ho
+OK hho
+OK jo
+OK zo
+OK lx
+OK llx
+OK hx
+OK hhx
+OK jx
+OK zx
+OK lX
+OK llX
+OK hX
+OK hhX
+OK jX
+OK zX
+OK lc C
+OK ls S
+
+
+
+

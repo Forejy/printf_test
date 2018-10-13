@@ -1,0 +1,5 @@
+-Le signe n'est jamais compte dans la precision mais il l'est dans le champs
+
+Cas des pointeurs :
+-Le '0x' n'est jamais pris en compte dans la precision mais il l'est dans le champs
+-Dans tous les cas le 0x est imprime avant d'appliquer la precision (et len_argument est diminue de 2)

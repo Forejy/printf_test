@@ -1,0 +1,37 @@
+Flag #	  Various uses:
+			%#o (Octal) 0 prefix inserted.
+			%#x (Hex)   0x prefix added to non-zero values.
+			%#X (Hex)   0X prefix added to non-zero values.
+
+Flag blank ' ' :
+			%d%i + : ' ' devant resultat
+			%d%i - : rien
+			%o : rien
+			%u : rien
+			%x : rien
+			%p : rien
+			%c : rien
+			%s : erreur (a gerer ?)
+
+Flag + :
+			%d%i + : + devant resultat
+			%d%i - : rien
+			%o : rien
+			%u : rien
+			%x : rien
+			%p : rien
+			%c : rien
+			%s : erreur (a gerer ?)
+
+Flag + et blank : jamais rien
+Flag blank et + : jamais rien
+
+Flag 0x :
+			%d%i  : remplit avec des 0 jusqu'a avoir un champs de taille x
+			%d%i  : remplit avec des 0 jusqu'a avoir un champs de taille x
+			%o : remplit avec des 0 jusqu'a avoir un champs de taille x
+			%u : remplit avec des 0 jusqu'a avoir un champs de taille x
+			%x : remplit avec des 0 jusqu'a avoir un champs de taille x
+			%p : remplit avec des 0 jusqu'a avoir un champs de taille x
+			%c : remplit avec des 0 jusqu'a avoir un champs de taille x
+			%s : remplit avec des 0 jusqu'a avoir un champs de taille x

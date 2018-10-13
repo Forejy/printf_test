@@ -1,0 +1,139 @@
+/*HANDLE_FORMAT V1 (FONCTIONNAL)
+size_t			handle_format(const char *format, va_list ap)
+{
+	int				i;
+	int				lenght_conv;
+	size_t			lenght_print;
+	t_flag			flag;
+
+	i = 0;
+	initialize_t_flag(&flag);
+	lenght_print = 0;
+	while(format[i])
+	{
+		if (format[i] == '%')
+		{
+			i++;
+
+			while((test_flag(format[i], &flag)) != 0)
+				i++;
+			i = i + test_champs(&format[i], &flag);
+			if (format[i] == '.')
+			{
+				i++;
+				i = i + test_precision(&format[i], &flag);
+			}
+			if (format[i] == '%')
+				lenght_print = lenght_print + my_putchar_printf('%', flag);
+			else
+			{
+				if ((lenght_conv = define_lenght_conv(&format[i])) != 0)
+					i += lenght_conv % 3;
+				lenght_print = lenght_print + handle_conversions(format[i], ap, lenght_conv, flag);
+			}
+		}
+		else
+		{
+			write(1, &format[i], 1);
+			lenght_print++;
+		}
+		i++;
+	}
+	return(lenght_print);
+}
+*/
+/* OLD HANDLER_FORMAT
+size_t		handle_format(const char *format, va_list ap)
+{
+	int				i;
+	int				lenght_conv;
+	t_flag			flag;
+	size_t			total_len;
+
+	i = 0;
+	total_len = 0;
+	initialize_t_flag(&flag);
+	while(format[i])
+	{
+		if (format[i] == '%')
+		{
+			i++;
+			while((test_flag(format[i], &flag)) != 0)
+				i++;
+			i = i + test_champs(&format[i], &flag);
+			if (format[i] == '.')
+			{
+				i++;
+				i = i + test_precision(&format[i], &flag);
+			}
+			else
+			{
+				if ((lenght_conv = define_lenght_conv(&format[i])) != 0)
+					i += lenght_conv % 3;
+				total_len += handle_conversions(format[i], ap, lenght_conv, flag);
+			}
+		}
+		else
+		{
+			write(1, &format[i], 1);
+			total_len += 1;
+		}
+		i++;
+	}
+	return (total_len);
+}
+*/
+
+/*HANDLE_FORMAT V2
+int 			test_if_conversion(char conv)
+{
+	if (conv == 'd' || conv == 'D' || conv == 'i' || conv == 'o' || 
+		conv == 'O' || conv == 'u' || conv == 'x' || conv == 'X' || 
+		conv == 'p' || conv == 'c' || conv == 'C' || conv == 's' || 
+		conv == 'S')
+		return (1);
+	return (0);
+}
+
+int				pre_analyze(const char *format)
+{
+	int			i;
+	
+	i = 0;
+	while (format[i] != '%' || format[i] != '\0')
+		i++;
+	if (i == 0 && format [i] == '%')
+		return (-1);
+	if (test_if_conversion(format[i - 1]) == 1)
+		return (i);
+	return (-2);
+}
+
+size_t			handle_format(const char *format, va_list ap)
+{
+	int			i;
+	int			len_format;
+	
+	i = 0;
+	if (format != NULL)
+	{
+		while (format[i] != '\0')
+		{
+			if (format[i] == '%')
+				len_format = pre_analyze(&format[i + 1]); //==> utiliser i pour renvoyer le nombre de parametres
+			if (len_format == -2)
+				
+		}
+	}
+}
+*/
+//HANDLE_FORMAT V3 (ACTUAL)
+
+/*
+int			handle_special_no_conv(const char *format, int i, va_list ap, t_flag *flag)
+{
+	if (format [i + 1] == '\0')
+		return (-1);
+	return (0);
+}
+*/

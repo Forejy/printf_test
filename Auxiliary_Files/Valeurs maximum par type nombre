@@ -1,0 +1,127 @@
+SHRT_MAX : 32767
+USHRT_MAX :65535
+INT MAX : 2147483647
+INT MAX : -2147483648
+UINT MAX : 4294967295
+LONG_MAX : 9223372036854775807
+LLONG_MAX : 9223372036854775807
+UINTMAX_T MAX : 9223372036854775807
+SSIZE_T_MAX : 9223372036854775807
+LLONG_MIN : -9223372036854775808
+
+ULONG_MAX : 18446744073709551615
+ULLONG MAX : 18446744073709551615
+SIZE_T MAX : 18446744073709551615
+UINTMAX_T MAX : 18446744073709551615
+UNSIGNED CHAR MAX : 255
+Hexa : valeur max accepte == unsigned int
+
+
+
+Manipulation de va_arg en fonction du nombre en entree et du type donne :
+Si le nombre depasse valeur maximum du type, ca overflow. Et si on utilise directement un va_arg en entree de fonction,
+ca overflow avant d'etre pris en entree.
+
+
+void	create_type_fct(type_fct_t *type_fct)
+{
+	type_fct[0].type = "c";OK
+	type_fct[0].f = &my_put_char;
+	type_fct[1].type = "C";OK
+	type_fct[1].f = &my_put_wint;
+	type_fct[2].type = "lc";
+	type_fct[2].f = &my_put_wint;
+	type_fct[3].type = "s";OK
+	type_fct[3].f = &my_put_str;
+	type_fct[4].type = "S";OK
+	type_fct[4].f = &my_put_wchart;
+	type_fct[5].type = "ls";
+	type_fct[5].f = &my_put_wchart;
+	type_fct[6].type = "d";OK
+	type_fct[7].f = &my_put_nbr;
+	type_fct[8].type = "ld";
+	type_fct[7].f = &my_my_put_long;
+	type_fct[8].type = "lld";
+	type_fct[22].f = &my_put_longlong;
+	type_fct[8].type = "zd";
+	type_fct[7].f = &my_put_size_t;
+	type_fct[8].type = "jd";
+	type_fct[7].f = &my_put_intmax_t;
+	type_fct[8].type = "D";OK
+	type_fct[7].f = &my_put_long;
+	type_fct[8].type = "lD";
+	type_fct[6].f = &my_put_longlong;
+	type_fct[7].type = "i";OK
+	type_fct[8].f = &my_put_nbr;
+	type_fct[9].type = "li";
+	type_fct[9].f = &my_put_long;
+	type_fct[9].type = "lli";
+	type_fct[9].f = &my_put_long;
+	type_fct[22].type = "zi";
+	type_fct[22].f = &my_put_size_t;
+	type_fct[22].type = "ji";
+	type_fct[22].f = &my_put_intmax_t;
+	create_type_fct_suite(type_fct);
+}
+
+void	create_type_fct(type_fct_t *type_fct)
+{
+	type_fct[12].type = "u";OK
+	type_fct[12].f = &my_put_UnsignedInt;
+	type_fct[12].type = "lu";
+	type_fct[12].f = &my_put_LongUnsigned;
+	type_fct[12].type = "llu";
+	type_fct[12].f = &my_put_UngisnedLongLong;
+	type_fct[22].type = "zu";
+	type_fct[22].f = &my_put_ssize_t;
+	type_fct[22].type = "ju";
+	type_fct[22].f = &my_put_uintmax_t;
+	type_fct[13].type = "U";
+	type_fct[13].f = &my_put_UnsignedLong;
+	type_fct[12].type = "lU";
+	type_fct[12].f = &my_put_nbrUnsignedLongLong;
+	type_fct[14].type = "o";OK
+	type_fct[14].f = &my_put_octal;
+	type_fct[16].type = "lo";
+	type_fct[16].f = &my_put_UnsignedLongOctal;
+	type_fct[16].type = "llo";
+	type_fct[16].f = &my_put_UnsignedLongLongOctal;
+	type_fct[22].type = "zo";
+	type_fct[16].f = &my_put_size_t;
+	type_fct[22].type = "jo";
+	type_fct[22].f = &my_put_intmax_t;
+	type_fct[15].type = "O";OK
+	type_fct[15].f = &my_put_UnsignedLongOctal;
+	type_fct[15].type = "lO";
+	type_fct[15].f = &my_put_UnsignedLongLongOctal;
+	type_fct[17].type = "x";OK
+	type_fct[17].f = &my_put_hexa;
+	type_fct[19].type = "lx";
+	type_fct[19].f = &my_put_LongHexa;
+	type_fct[19].type = "llx";
+	type_fct[19].f = &my_put_LongLongHexa;
+	type_fct[22].type = "zx";
+	type_fct[16].f = &my_put_ssize_t;
+	type_fct[22].type = "jx";
+	type_fct[22].f = &my_put_uintmax_t;
+	type_fct[18].type = "X";OK
+	type_fct[18].f = &my_put_HEXA;
+	type_fct[20].type = "lX";
+	type_fct[20].f = &my_put_LongHEXA;
+	type_fct[20].type = "llX";
+	type_fct[20].f = &my_put_LongLongHEXA;
+	type_fct[22].type = "zX";
+	type_fct[16].f = &my_put_ssize_t;
+	type_fct[22].type = "jX";
+	type_fct[16].f = &my_put_uintmax_t;
+	create_type_fct_suite2(type_fct);
+}
+
+void	create_type_fct(type_fct_t *type_fct)
+{
+
+	type_fct[21].type = "p";
+	type_fct[21].f = &printpointer;
+	type_fct[22].type = "%";
+	type_fct[22].f = &printpercent;
+}

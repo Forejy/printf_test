@@ -1,0 +1,48 @@
+IMPRIMER UNICODE
+
+
+Ok Tester le fonctionnement des conversions %C et %S.
+    -Declarer un wint_t pour %C, un wchar_t pour %S
+    -La declaration se fait a l'aide de l'outils L'unicode(ornot)_caracter';
+    -Comme a l'usage, on peut directement utiliser la syntaxe printf("%S\n", L"uni_caracter");
+
+Tester d'afficher un caractere Unicode avec 'write'
+PAS OK    Tester d'afficher un unicode avec un putchar qui prend un wint_t
+    Sur 4 bits
+OK        Un Unic necessitant 3 bits sur 3 bits
+PAS OK    Un Unic necessitant 3 bits sur 4 bits Est-ce que ca marche aussi ?
+            >> La fonction doit tenir compte du nombre de bits maximum dont le caractere a besoin
+    Creer la fonction qui convertit un caractere en binaire format unicode
+    Creer la fonction binaire_vers_hexa
+    Les fonctions de conversion permettent d'afficher le caractere avec 'write'
+    Les faire fonctionner avec un wint_t
+Fuckin bien joue
+
+
+
+DONETODO : Convertir le binaire en decinal et l'imprimer
+DONETODO : TESTER PLUSIEURS UNICODES A LA SUITE
+DONETODO : Reorganiser le code puis l'ajouter au code de my_printf
+DONETODO : Trouver comment gerer le type de l'argument v_list, tester avec typeof mais je pense que je vais etre oblige de faire un if par conversion
+DONETODO : Afficher l'argument en fonction de la conversion pour 1 argument
+DONETODO : Tester toutes les conversions pour 1 argument
+DONETODO : Afficher tous les arguments pour chaque conversion possible (sans champs)
+			--> Faire une structure avec chaque champs, passant de 1 a 0 en fonction de format
+DONETODO : Flags #o
+DONETODO : Flags #x
+DONETODO : Flags #X
+DONETODO : Comprendre pourquoi les defines ne fonctionnent pas : voir handlers.h et tests du flag #
+DONETODO : Comprendre pourquoi la conversion %o n'affiche pas le chiffre 0
+DONETODO		Regler le probmeme de l'affichage des espaces par la droite avec le flag '-'. Il y a des tests a faire.
+TODO		Adapter le programme avec le buffer pour les cas speciaux avec argument et resultat = -1 avec chaines avant
+
+10/05/18 30min :  comprendre difference entre longueur de champs et champs
+				  conversion l'attribution des lenght_convs (astuce avec le modulo pour increm i)
+		 30 min : test et fontion my_putnbr_char
+		 1h 24 : verification du fillit
+		 2h : Tests
+			  Modification de chaque fonction d'affichage de nombre avec uintmax en entree
+			  Fin de la gestion des lenght_convs
+
+
+
