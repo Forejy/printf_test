@@ -71,7 +71,7 @@ int			analyze_and_printf(const char *format, va_list *ap, t_flag *flag)
 		i += define_lenght_conv(&format[i], flag);
 		i += test_champs(&format[i], flag, ap);
 		if (format[i] == '.')
-			i += test_precision(&format[i], flag, ap);
+			i += test_prec(&format[i], flag, ap);
 	}
 	if ((ret = test_if_conv(format[i], flag, i)) != -2)
 		return (ret);
