@@ -1,5 +1,6 @@
 #ifndef AUXILIARY_FUNCTIONS_FOR_UNICODE_H
 # define AUXILIARY_FUNCTIONS_FOR_UNICODE_H
+# include <wchar.h>
 
 int 			test_validity_of_characters(wchar_t *string_wchar);
 int				compute_power(int base, unsigned int exposant);
