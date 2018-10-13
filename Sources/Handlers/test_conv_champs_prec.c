@@ -74,7 +74,7 @@ int			test_champs(const char *format, t_flag *flag, va_list *ap)
 	return (0);
 }
 
-int				test_precision(const char *format, t_flag *flag, va_list *ap)
+int				test_prec(const char *format, t_flag *flag, va_list *ap)
 {
 	int		i;
 	int		nb;
