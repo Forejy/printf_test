@@ -27,7 +27,7 @@ unsigned int				compute_minimum_number_of_bits(unsigned int n)
 		pow2 = 2 * pow2;
 		k++;
 	}
-	return (k);
+	return (k + 1);
 }
 
 int				compute_minimum_number_of_bytes_in_utf8(int decimal)
